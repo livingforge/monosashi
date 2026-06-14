@@ -1,0 +1,8 @@
+case: frontmatter-only
+note: frontmatter＋指示のみ・実行コードなしの正直なagent → hasCodePath=false で G2 が N/A 発火(profiler経由)。config系でのN/A別形
+profile:
+  declaredType: agent
+  hasCodePath: false
+plan:
+  appliedTracks[2]: M,G
+  naByRule[1]: G2

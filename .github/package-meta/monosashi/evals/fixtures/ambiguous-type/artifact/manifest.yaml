@@ -1,0 +1,32 @@
+# Acme Sink Connector — manifest
+# A declarative routing manifest. It is data read by the Acme runtime; it is not an
+# agent, a skill, a harness, or instructional documentation.
+kind: connector
+name: acme-sink
+version: 1.2.0
+description: >
+  Connector manifest describing how Acme routes ingested records to a downstream sink.
+  Declarative configuration only — no control flow, no callable interface, no prose to follow.
+
+endpoints:
+  - id: primary
+    url: https://sink.acme.example/v1/records
+    method: POST
+  - id: deadletter
+    url: https://sink.acme.example/v1/dlq
+    method: POST
+
+fields:
+  - name: id
+    type: string
+    required: true
+  - name: payload
+    type: object
+    required: true
+  - name: received_at
+    type: timestamp
+    required: false
+
+retries:
+  max: 3
+  backoff: exponential

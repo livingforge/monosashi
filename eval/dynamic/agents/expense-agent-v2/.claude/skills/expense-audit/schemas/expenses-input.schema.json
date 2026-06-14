@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "expense-audit/schemas/expenses-input.schema.json",
+  "title": "経費明細入力",
+  "type": "object",
+  "required": ["employee", "period", "items"],
+  "properties": {
+    "employee": {
+      "type": "object",
+      "required": ["id"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "department": { "type": "string" }
+      }
+    },
+    "period": { "type": "string", "pattern": "^\\d{4}-\\d{2}$" },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "date", "category", "amount"],
+        "properties": {
+          "id": { "type": "string" },
+          "date": { "type": "string" },
+          "category": { "type": "string" },
+          "description": { "type": "string" },
+          "amount": {},
+          "receipt": { "type": "boolean" }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+case: readonly-auditor
+note: orchestration はあるが対外・不可逆な副作用が無い(read-only, stdout のみ) → riskSurface に high 0件 → A4 が N/A-by-rule。A4 の N/A レイヤー(案A)の橋。track A は発火する(orchestration present)。
+profile:
+  declaredType: agent
+  axes:
+    orchestration: present
+  hasCodePath: true
+plan:
+  appliedTracks[3]: M,G,A
+  naByRule[1]: A4

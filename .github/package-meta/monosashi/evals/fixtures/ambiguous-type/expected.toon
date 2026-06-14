@@ -1,0 +1,7 @@
+case: ambiguous-type
+note: declaredType が4種(agent/skill/harness/knowledge)に当たらない → decAxis=null → 軸に依らず M2=1。M2中間分岐の橋
+plan:
+  appliedTracks[2]: M,G
+  m2:
+    score: 1
+    severity: MEDIUM

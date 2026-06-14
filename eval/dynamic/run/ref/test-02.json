@@ -1,0 +1,191 @@
+{
+  "type": "expense_report_result",
+  "employeeId": "EH01",
+  "period": "2026-05",
+  "summary": {
+    "total": 28,
+    "approved": 12,
+    "rejected": 11,
+    "needsReview": 5,
+    "approvedAmount": 59156
+  },
+  "results": [
+    {
+      "id": "A-01",
+      "status": "approved",
+      "reasons": []
+    },
+    {
+      "id": "A-02",
+      "status": "approved",
+      "reasons": []
+    },
+    {
+      "id": "A-03",
+      "status": "needs_review",
+      "reasons": [
+        "ENTERTAINMENT_LIMIT"
+      ]
+    },
+    {
+      "id": "A-04",
+      "status": "rejected",
+      "reasons": [
+        "OUT_OF_PERIOD",
+        "RECEIPT_REQUIRED"
+      ]
+    },
+    {
+      "id": "A-05",
+      "status": "rejected",
+      "reasons": [
+        "UNKNOWN_CATEGORY"
+      ]
+    },
+    {
+      "id": "A-06",
+      "status": "rejected",
+      "reasons": [
+        "INVALID_AMOUNT"
+      ]
+    },
+    {
+      "id": "A-07",
+      "status": "rejected",
+      "reasons": [
+        "RECEIPT_REQUIRED"
+      ]
+    },
+    {
+      "id": "A-08",
+      "status": "needs_review",
+      "reasons": [
+        "ENTERTAINMENT_LIMIT"
+      ]
+    },
+    {
+      "id": "A-09",
+      "status": "approved",
+      "reasons": []
+    },
+    {
+      "id": "A-10",
+      "status": "approved",
+      "reasons": []
+    },
+    {
+      "id": "A-11",
+      "status": "rejected",
+      "reasons": [
+        "OUT_OF_PERIOD"
+      ]
+    },
+    {
+      "id": "A-12",
+      "status": "approved",
+      "reasons": []
+    },
+    {
+      "id": "A-13",
+      "status": "needs_review",
+      "reasons": [
+        "ENTERTAINMENT_LIMIT",
+        "POSSIBLE_DUPLICATE"
+      ]
+    },
+    {
+      "id": "A-14",
+      "status": "rejected",
+      "reasons": [
+        "UNKNOWN_CATEGORY"
+      ]
+    },
+    {
+      "id": "A-15",
+      "status": "approved",
+      "reasons": []
+    },
+    {
+      "id": "A-16",
+      "status": "approved",
+      "reasons": []
+    },
+    {
+      "id": "A-17",
+      "status": "rejected",
+      "reasons": [
+        "INVALID_AMOUNT"
+      ]
+    },
+    {
+      "id": "A-18",
+      "status": "rejected",
+      "reasons": [
+        "OUT_OF_PERIOD",
+        "ENTERTAINMENT_LIMIT"
+      ]
+    },
+    {
+      "id": "A-19",
+      "status": "rejected",
+      "reasons": [
+        "RECEIPT_REQUIRED"
+      ]
+    },
+    {
+      "id": "A-20",
+      "status": "approved",
+      "reasons": []
+    },
+    {
+      "id": "A-21",
+      "status": "rejected",
+      "reasons": [
+        "INVALID_AMOUNT",
+        "POSSIBLE_DUPLICATE"
+      ]
+    },
+    {
+      "id": "A-22",
+      "status": "approved",
+      "reasons": []
+    },
+    {
+      "id": "A-23",
+      "status": "needs_review",
+      "reasons": [
+        "ENTERTAINMENT_LIMIT"
+      ]
+    },
+    {
+      "id": "A-24",
+      "status": "approved",
+      "reasons": []
+    },
+    {
+      "id": "A-25",
+      "status": "rejected",
+      "reasons": [
+        "OUT_OF_PERIOD",
+        "RECEIPT_REQUIRED"
+      ]
+    },
+    {
+      "id": "A-26",
+      "status": "approved",
+      "reasons": []
+    },
+    {
+      "id": "A-27",
+      "status": "approved",
+      "reasons": []
+    },
+    {
+      "id": "A-28",
+      "status": "needs_review",
+      "reasons": [
+        "ENTERTAINMENT_LIMIT"
+      ]
+    }
+  ]
+}

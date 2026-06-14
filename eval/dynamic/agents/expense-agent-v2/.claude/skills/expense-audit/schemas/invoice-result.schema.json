@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "expense-audit/schemas/invoice-result.schema.json",
+  "title": "請求書検証結果",
+  "type": "object",
+  "required": ["type", "invoiceId", "valid", "errors"],
+  "additionalProperties": false,
+  "properties": {
+    "type": { "const": "invoice_validation_result" },
+    "invoiceId": { "type": "string" },
+    "valid": { "type": "boolean" },
+    "errors": {
+      "type": "array",
+      "items": {
+        "enum": ["INVALID_REG_NUMBER", "TAX_MISMATCH", "INVALID_DUE_DATE", "INVALID_TAX_RATE"]
+      }
+    }
+  }
+}

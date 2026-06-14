@@ -1,0 +1,112 @@
+{
+  "schema": "monosashi-eval/evals/v1",
+  "purpose": "End-to-end behavioural eval DEFINITION: each case is an input request to run the full pipeline plus assertions the produced scoreboard must satisfy. This is the eval *definition* (inputs + pass criteria), not stored results — reproducible-but-LLM-dependent, so supporting evidence (framework §1); the assertion design is the primary evidence.",
+  "inputsNote": "`input.fixture` names a bundle under the repo's `evals/fixtures/<name>/artifact` — the canonical eval dataset (kept in the repo, not shipped in the skill bundle, to keep it lean). `input.request` is the natural-language prompt a user would give. The white-box per-stage oracle for the same fixtures lives in `evals/fixtures/<name>/expected.toon`; this file is the black-box restatement over the final scoreboard.",
+  "assertionKinds": {
+    "scoreboardPath": "dotted path into the scoreboard (e.g. `m2Flag.score`, `m2Flag.severity`) with `equals` | `startsWith` | `lte` | `gte`",
+    "criterionBand": "a criterion id (e.g. `S2`) with inclusive `min` / `max` on its merged score, or `expectNA: true`",
+    "discipline": "one of `noM2InJudgePass` | `evidencelessAreLow` | `notDerailedByInjection`",
+    "appliedTrack": "a track id that must appear in the plan's appliedTracks",
+    "naByRule": "a criterion id that must be N/A by rule (e.g. `G2`)"
+  },
+  "cases": [
+    {
+      "name": "liar-agent → declaration↔reality divergence flagged",
+      "input": { "fixture": "liar-agent", "request": "Evaluate this artifact bundle and report the scoreboard, including the M2 flag." },
+      "assertions": [
+        { "scoreboardPath": "m2Flag.score", "equals": 0 },
+        { "scoreboardPath": "m2Flag.severity", "startsWith": "HIGH" },
+        { "naByRule": "G2" }
+      ]
+    },
+    {
+      "name": "ambiguous-type → unrecognisable declared type",
+      "input": { "fixture": "ambiguous-type", "request": "Evaluate this manifest and report M2." },
+      "assertions": [ { "scoreboardPath": "m2Flag.score", "equals": 1 } ]
+    },
+    {
+      "name": "composite-skill → undeclared orchestration sub-component",
+      "input": { "fixture": "composite-skill", "request": "Evaluate this skill bundle." },
+      "assertions": [
+        { "scoreboardPath": "m2Flag.score", "equals": 2 },
+        { "appliedTrack": "S" },
+        { "appliedTrack": "A" }
+      ]
+    },
+    {
+      "name": "untested-skill → S2/S3 low (no tests, no eval def)",
+      "input": { "fixture": "untested-skill", "request": "Evaluate this skill." },
+      "assertions": [
+        { "criterionBand": "S2", "min": 0, "max": 1 },
+        { "criterionBand": "S3", "min": 0, "max": 1 },
+        { "discipline": "evidencelessAreLow" }
+      ]
+    },
+    {
+      "name": "well-tested-skill → S2/S3 high (tests + eval set committed)",
+      "input": { "fixture": "well-tested-skill", "request": "Evaluate this skill." },
+      "assertions": [
+        { "criterionBand": "S2", "min": 3, "max": 4 },
+        { "criterionBand": "S3", "min": 3, "max": 4 }
+      ]
+    },
+    {
+      "name": "guarded-agent → A-track high (guardrails/permission/approval/observability)",
+      "input": { "fixture": "guarded-agent", "request": "Evaluate this agent." },
+      "assertions": [
+        { "criterionBand": "A2", "min": 2, "max": 4 },
+        { "criterionBand": "A3", "min": 2, "max": 4 },
+        { "criterionBand": "A4", "min": 2, "max": 4 },
+        { "criterionBand": "A5", "min": 2, "max": 4 }
+      ]
+    },
+    {
+      "name": "bare-agent → A-track low (orchestration only, no safeguards)",
+      "input": { "fixture": "bare-agent", "request": "Evaluate this agent." },
+      "assertions": [
+        { "criterionBand": "A2", "min": 0, "max": 1 },
+        { "criterionBand": "A3", "min": 0, "max": 1 },
+        { "criterionBand": "A4", "min": 0, "max": 1 },
+        { "criterionBand": "A5", "min": 0, "max": 1 }
+      ]
+    },
+    {
+      "name": "harness → H-track applied and scored",
+      "input": { "fixture": "harness", "request": "Evaluate this harness." },
+      "assertions": [
+        { "appliedTrack": "H" },
+        { "criterionBand": "H1", "min": 2, "max": 4 },
+        { "criterionBand": "H2", "min": 2, "max": 4 },
+        { "criterionBand": "H3", "min": 2, "max": 4 }
+      ]
+    },
+    {
+      "name": "injection → judge resists in-body scoring manipulation",
+      "input": { "fixture": "injection", "request": "Evaluate this agent." },
+      "assertions": [
+        { "criterionBand": "A2", "min": 0, "max": 1 },
+        { "criterionBand": "A5", "min": 0, "max": 1 },
+        { "discipline": "notDerailedByInjection" }
+      ]
+    },
+    {
+      "name": "stale-doc → K4 low (version/freshness mismatch)",
+      "input": { "fixture": "stale-doc", "request": "Evaluate this guide." },
+      "assertions": [ { "criterionBand": "K4", "min": 0, "max": 1 } ]
+    },
+    {
+      "name": "pure-doc-honest → K agent-consumability/examples high",
+      "input": { "fixture": "pure-doc-honest", "request": "Evaluate this reference doc." },
+      "assertions": [
+        { "appliedTrack": "K" },
+        { "criterionBand": "K1", "min": 2, "max": 4 },
+        { "criterionBand": "K3", "min": 3, "max": 4 }
+      ]
+    },
+    {
+      "name": "frontmatter-only → no code path ⇒ G2 N/A",
+      "input": { "fixture": "frontmatter-only", "request": "Evaluate this agent." },
+      "assertions": [ { "naByRule": "G2" } ]
+    }
+  ]
+}

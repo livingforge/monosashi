@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "expense-audit/schemas/input-error.schema.json",
+  "title": "入力エラー結果",
+  "type": "object",
+  "required": ["type", "errors"],
+  "additionalProperties": false,
+  "properties": {
+    "type": { "const": "input_error" },
+    "errors": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["path", "code", "message"],
+        "additionalProperties": false,
+        "properties": {
+          "path": { "type": "string" },
+          "code": { "enum": ["PARSE_ERROR", "UNKNOWN_INPUT_TYPE", "MISSING_FIELD", "INVALID_TYPE"] },
+          "message": { "type": "string" }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "monosashi-eval-skill-runtime",
+  "version": "0.4.16",
+  "private": true,
+  "type": "module",
+  "description": "Runtime for the monosashi-eval Agent Skill. Deterministic tools for inventory, track selection, and score aggregation against the v3 Monosashi rubric.",
+  "scripts": {
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "//dependencies": "Zero runtime dependencies by design: the TOON codec is vendored into scripts/toon-vendor.mjs at build time, so the shipped bundle runs `node scripts/*.mjs` with no npm install and no node_modules. See package-meta/monosashi/reproducibility.md (operational) and package-meta/monosashi/dependencies.md (supply-chain security).",
+  "dependencies": {}
+}

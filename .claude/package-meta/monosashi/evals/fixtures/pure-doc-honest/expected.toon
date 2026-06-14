@@ -1,0 +1,16 @@
+case: pure-doc-honest
+note: 正直な知識doc(良質)。落とし穴/禁止・誤用例の対比・役割区画化を明示 → K1/K3/K5 高帯。K高帯側を埋める
+profile:
+  axes:
+    knowledge: primary
+  hasCodePath: false
+plan:
+  appliedTracks[3]: M,G,K
+  naByRule[1]: G2
+bands[3]{criterion,min,max}:
+  K1,2,4
+  K3,2,4
+  K5,2,4
+discipline:
+  noM2InJudgePass: true
+  evidencelessAreLow: true

@@ -1,0 +1,11 @@
+{
+  "type": "invoice_validation_result",
+  "invoiceId": "INV-H-B",
+  "valid": false,
+  "errors": [
+    "INVALID_REG_NUMBER",
+    "TAX_MISMATCH",
+    "INVALID_DUE_DATE",
+    "INVALID_TAX_RATE"
+  ]
+}

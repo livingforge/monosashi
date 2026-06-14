@@ -1,0 +1,13 @@
+case: liar-agent
+note: 宣言agent・orchestration不在 → 機械M2=0 HIGH の橋（raw成果物→実profiler→select-tracks）
+profile:
+  declaredType: agent
+  axes:
+    orchestration: absent
+  hasCodePath: false
+plan:
+  appliedTracks[2]: M,G
+  naByRule[1]: G2
+  m2:
+    score: 0
+    severity: HIGH

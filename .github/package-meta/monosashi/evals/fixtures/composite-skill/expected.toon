@@ -1,0 +1,9 @@
+case: composite-skill
+note: 宣言skill(encapsulation)＋未宣言の内部orchestration → M2=2 LOW。複合体で S+A 両トラック併用（framework §4）。declaredType は profiler の自由文(model-unstable; 複合体は composite 等も妥当)で production は inventory の guessedDeclaredType を正本に上書きするため pin しない。正しさは m2.score=2(skill軸+未宣言orch から導出)が transitively 担保。
+profile:
+  hasCodePath: true
+plan:
+  appliedTracks[4]: M,G,A,S
+  m2:
+    score: 2
+    severity: LOW

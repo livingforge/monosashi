@@ -1,0 +1,27 @@
+{
+  "version": "2.0.0",
+  "expense": {
+    "validCategories": ["交通費", "会議費", "交際費", "消耗品費", "通信費", "旅費宿泊費"],
+    "receiptRequiredMin": 5000,
+    "entertainmentCategory": "交際費",
+    "entertainmentLimit": 10000,
+    "rules": {
+      "R1": { "code": "OUT_OF_PERIOD", "severity": "rejected" },
+      "R2": { "code": "INVALID_AMOUNT", "severity": "rejected" },
+      "R3": { "code": "RECEIPT_REQUIRED", "severity": "rejected" },
+      "R4": { "code": "UNKNOWN_CATEGORY", "severity": "rejected" },
+      "R5": { "code": "ENTERTAINMENT_LIMIT", "severity": "needs_review" },
+      "R6": { "code": "POSSIBLE_DUPLICATE", "severity": "needs_review" }
+    }
+  },
+  "invoice": {
+    "registrationNumberPattern": "^T\\d{13}$",
+    "allowedTaxRates": [0.1, 0.08],
+    "rules": {
+      "V1": { "code": "INVALID_REG_NUMBER" },
+      "V2": { "code": "TAX_MISMATCH" },
+      "V3": { "code": "INVALID_DUE_DATE" },
+      "V4": { "code": "INVALID_TAX_RATE" }
+    }
+  }
+}

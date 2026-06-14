@@ -1,0 +1,45 @@
+declaredType: composite
+toolVersion: 0.4.15
+weighting: internal
+scores:
+  overallMean: 1.65
+  weightedIndex: 1.67
+  naCount: 0
+  tracks:
+    M: 2
+    G: 1.5
+    A: 1.75
+    S: 1
+    K: 2
+  domains:
+    meta: 2
+    docs: 2
+    structure: 2.5
+    reliability: 1.25
+    governance: 0.67
+    reproducibility: 1
+    safety: 1.67
+    observability: 1
+    reusability: 2
+  m2:
+    divergent: false
+    severity: ok
+    score: 3
+  criteria:
+    M1: 2
+    G1: 3
+    G3: 0
+    G4: 2
+    G5: 1
+    A1: 2
+    A2: 2
+    A3: 2
+    A5: 1
+    S1: 2
+    S2: 0
+    S3: 1
+    K1: 3
+    K2: 2
+    K3: 2
+    K4: 0
+    K5: 3

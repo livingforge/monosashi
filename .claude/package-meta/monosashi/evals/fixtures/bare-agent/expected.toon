@@ -1,0 +1,13 @@
+case: bare-agent
+note: orchestrationはあるが防御/権限/承認/観測性が無い → A2-A5 低帯。F6(guarded-agent)との弁別
+profile:
+  declaredType: agent
+  hasCodePath: true
+bands[4]{criterion,min,max}:
+  A2,0,1
+  A3,0,1
+  A4,0,1
+  A5,0,1
+discipline:
+  noM2InJudgePass: true
+  evidencelessAreLow: true

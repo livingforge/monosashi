@@ -1,0 +1,12 @@
+case: well-tested-skill
+note: テスト充実＋eval定義/データをコミット → S2/S3 高帯。F4(untested-skill)との弁別＝judgeが設計品質を見分けるか
+profile:
+  declaredType: skill
+  hasCodePath: true
+bands[3]{criterion,min,max}:
+  S1,2,4
+  S2,3,4
+  S3,3,4
+discipline:
+  noM2InJudgePass: true
+  evidencelessAreLow: true

@@ -1,0 +1,13 @@
+case: harness
+note: 他エージェントを包む横断的なeval/防御/観測層 → H帯。harness軸発火(H track適用)が本質。declaredTypeはSKILL.md梱包ゆえ'skill'に振れるため非pin
+profile:
+  hasCodePath: true
+plan:
+  appliedTracks[3]: M,G,H
+bands[3]{criterion,min,max}:
+  H1,2,4
+  H2,2,4
+  H3,2,4
+discipline:
+  noM2InJudgePass: true
+  evidencelessAreLow: true

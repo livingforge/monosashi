@@ -1,0 +1,150 @@
+{
+  "agent": "v1-text",
+  "model": "opus",
+  "N": 30,
+  "accMean": 4,
+  "perCase": [
+    {
+      "id": "test-02",
+      "acc": 30,
+      "distinct": 1
+    },
+    {
+      "id": "test-04",
+      "acc": 30,
+      "distinct": 1
+    },
+    {
+      "id": "test-01",
+      "acc": 30,
+      "distinct": 1
+    },
+    {
+      "id": "test-03",
+      "acc": 30,
+      "distinct": 1
+    }
+  ],
+  "perRep": [
+    {
+      "rep": 1,
+      "accN": 4
+    },
+    {
+      "rep": 2,
+      "accN": 4
+    },
+    {
+      "rep": 3,
+      "accN": 4
+    },
+    {
+      "rep": 4,
+      "accN": 4
+    },
+    {
+      "rep": 5,
+      "accN": 4
+    },
+    {
+      "rep": 6,
+      "accN": 4
+    },
+    {
+      "rep": 7,
+      "accN": 4
+    },
+    {
+      "rep": 8,
+      "accN": 4
+    },
+    {
+      "rep": 9,
+      "accN": 4
+    },
+    {
+      "rep": 10,
+      "accN": 4
+    },
+    {
+      "rep": 11,
+      "accN": 4
+    },
+    {
+      "rep": 12,
+      "accN": 4
+    },
+    {
+      "rep": 13,
+      "accN": 4
+    },
+    {
+      "rep": 14,
+      "accN": 4
+    },
+    {
+      "rep": 15,
+      "accN": 4
+    },
+    {
+      "rep": 16,
+      "accN": 4
+    },
+    {
+      "rep": 17,
+      "accN": 4
+    },
+    {
+      "rep": 18,
+      "accN": 4
+    },
+    {
+      "rep": 19,
+      "accN": 4
+    },
+    {
+      "rep": 20,
+      "accN": 4
+    },
+    {
+      "rep": 21,
+      "accN": 4
+    },
+    {
+      "rep": 22,
+      "accN": 4
+    },
+    {
+      "rep": 23,
+      "accN": 4
+    },
+    {
+      "rep": 24,
+      "accN": 4
+    },
+    {
+      "rep": 25,
+      "accN": 4
+    },
+    {
+      "rep": 26,
+      "accN": 4
+    },
+    {
+      "rep": 27,
+      "accN": 4
+    },
+    {
+      "rep": 28,
+      "accN": 4
+    },
+    {
+      "rep": 29,
+      "accN": 4
+    },
+    {
+      "rep": 30,
+      "accN": 4
+    }
+  ]
+}

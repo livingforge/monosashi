@@ -1,0 +1,16 @@
+{
+  "dataset": "slugify-v1",
+  "description": "Labelled input→expected slug cases, grouped by class. The eval scores exact-match rate overall and per class (eval-design.md).",
+  "cases": [
+    { "class": "basic",       "input": "Hello World",        "expected": "hello-world" },
+    { "class": "punctuation", "input": "Hello, World!",      "expected": "hello-world" },
+    { "class": "punctuation", "input": "C++ & Rust: notes",  "expected": "c-rust-notes" },
+    { "class": "separators",  "input": "a   b___c",          "expected": "a-b-c" },
+    { "class": "separators",  "input": "  --Hello--  ",      "expected": "hello" },
+    { "class": "unicode",     "input": "Café Crème",         "expected": "cafe-creme" },
+    { "class": "unicode",     "input": "naïve façade",       "expected": "naive-facade" },
+    { "class": "numeric",     "input": "Top 10 Tips",        "expected": "top-10-tips" },
+    { "class": "edge",        "input": "",                   "expected": "" },
+    { "class": "edge",        "input": "!!!",                "expected": "" }
+  ]
+}

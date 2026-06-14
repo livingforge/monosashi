@@ -1,0 +1,54 @@
+{
+  "employee": { "id": "E001", "name": "山田太郎", "department": "営業部" },
+  "period": "2026-05",
+  "items": [
+    {
+      "id": "EXP-001",
+      "date": "2026-05-12",
+      "category": "交通費",
+      "description": "客先訪問 電車代",
+      "amount": 1200,
+      "receipt": true
+    },
+    {
+      "id": "EXP-002",
+      "date": "2026-05-15",
+      "category": "会議費",
+      "description": "打ち合わせ会場費",
+      "amount": 8000,
+      "receipt": false
+    },
+    {
+      "id": "EXP-003",
+      "date": "2026-05-20",
+      "category": "交際費",
+      "description": "取引先会食",
+      "amount": 15000,
+      "receipt": true
+    },
+    {
+      "id": "EXP-004",
+      "date": "2026-04-30",
+      "category": "雑費",
+      "description": "文房具",
+      "amount": 980,
+      "receipt": true
+    },
+    {
+      "id": "EXP-005",
+      "date": "2026-05-12",
+      "category": "交通費",
+      "description": "客先訪問 電車代(復路)",
+      "amount": 1200,
+      "receipt": true
+    },
+    {
+      "id": "EXP-006",
+      "date": "2026-05-25",
+      "category": "通信費",
+      "description": "モバイルルーター利用料",
+      "amount": 4980,
+      "receipt": true
+    }
+  ]
+}

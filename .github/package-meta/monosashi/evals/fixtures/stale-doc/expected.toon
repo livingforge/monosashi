@@ -1,0 +1,11 @@
+case: stale-doc
+note: 版表記(v1/2019)と実体(例はv3 API)が矛盾し整合確認手段なし → K4 低帯。版不整合の検知を検証
+profile:
+  axes:
+    knowledge: primary
+  hasCodePath: false
+bands[1]{criterion,min,max}:
+  K4,0,1
+discipline:
+  noM2InJudgePass: true
+  evidencelessAreLow: true

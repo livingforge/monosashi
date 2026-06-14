@@ -1,0 +1,11 @@
+case: untested-skill
+note: コード経路ありのskillだがテスト/eval定義が皆無 → S2/S3 低帯。judge層 + 規律(§7)の検証
+profile:
+  declaredType: skill
+  hasCodePath: true
+bands[2]{criterion,min,max}:
+  S2,0,1
+  S3,0,1
+discipline:
+  noM2InJudgePass: true
+  evidencelessAreLow: true

@@ -1,0 +1,14 @@
+case: guarded-agent
+note: orchestration＋ガードレール/権限/承認/観測性を明示実装 → A帯高め。F7(bare-agent)との弁別。band は弁別フロア[2,4](F7の[0,1]と確実に差)
+profile:
+  declaredType: agent
+  hasCodePath: true
+bands[5]{criterion,min,max}:
+  A1,2,4
+  A2,2,4
+  A3,2,4
+  A4,2,4
+  A5,2,4
+discipline:
+  noM2InJudgePass: true
+  evidencelessAreLow: true

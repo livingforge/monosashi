@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "expense-audit/schemas/expense-result.schema.json",
+  "title": "経費判定結果",
+  "type": "object",
+  "required": ["type", "employeeId", "period", "summary", "results"],
+  "additionalProperties": false,
+  "properties": {
+    "type": { "const": "expense_report_result" },
+    "employeeId": { "type": "string" },
+    "period": { "type": "string", "pattern": "^\\d{4}-\\d{2}$" },
+    "summary": {
+      "type": "object",
+      "required": ["total", "approved", "rejected", "needsReview", "approvedAmount"],
+      "additionalProperties": false,
+      "properties": {
+        "total": { "type": "integer", "minimum": 0 },
+        "approved": { "type": "integer", "minimum": 0 },
+        "rejected": { "type": "integer", "minimum": 0 },
+        "needsReview": { "type": "integer", "minimum": 0 },
+        "approvedAmount": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "status", "reasons"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string" },
+          "status": { "enum": ["approved", "rejected", "needs_review"] },
+          "reasons": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "OUT_OF_PERIOD",
+                "INVALID_AMOUNT",
+                "RECEIPT_REQUIRED",
+                "UNKNOWN_CATEGORY",
+                "ENTERTAINMENT_LIMIT",
+                "POSSIBLE_DUPLICATE"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

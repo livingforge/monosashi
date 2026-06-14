@@ -1,0 +1,114 @@
+{
+  "type": "expense_report_result",
+  "employeeId": "EH02",
+  "period": "2026-05",
+  "summary": {
+    "total": 20,
+    "approved": 20,
+    "rejected": 0,
+    "needsReview": 0,
+    "approvedAmount": 98810
+  },
+  "results": [
+    {
+      "id": "B-01",
+      "status": "approved",
+      "reasons": []
+    },
+    {
+      "id": "B-02",
+      "status": "approved",
+      "reasons": []
+    },
+    {
+      "id": "B-03",
+      "status": "approved",
+      "reasons": []
+    },
+    {
+      "id": "B-04",
+      "status": "approved",
+      "reasons": []
+    },
+    {
+      "id": "B-05",
+      "status": "approved",
+      "reasons": []
+    },
+    {
+      "id": "B-06",
+      "status": "approved",
+      "reasons": []
+    },
+    {
+      "id": "B-07",
+      "status": "approved",
+      "reasons": []
+    },
+    {
+      "id": "B-08",
+      "status": "approved",
+      "reasons": []
+    },
+    {
+      "id": "B-09",
+      "status": "approved",
+      "reasons": []
+    },
+    {
+      "id": "B-10",
+      "status": "approved",
+      "reasons": []
+    },
+    {
+      "id": "B-11",
+      "status": "approved",
+      "reasons": []
+    },
+    {
+      "id": "B-12",
+      "status": "approved",
+      "reasons": []
+    },
+    {
+      "id": "B-13",
+      "status": "approved",
+      "reasons": []
+    },
+    {
+      "id": "B-14",
+      "status": "approved",
+      "reasons": []
+    },
+    {
+      "id": "B-15",
+      "status": "approved",
+      "reasons": []
+    },
+    {
+      "id": "B-16",
+      "status": "approved",
+      "reasons": []
+    },
+    {
+      "id": "B-17",
+      "status": "approved",
+      "reasons": []
+    },
+    {
+      "id": "B-18",
+      "status": "approved",
+      "reasons": []
+    },
+    {
+      "id": "B-19",
+      "status": "approved",
+      "reasons": []
+    },
+    {
+      "id": "B-20",
+      "status": "approved",
+      "reasons": []
+    }
+  ]
+}

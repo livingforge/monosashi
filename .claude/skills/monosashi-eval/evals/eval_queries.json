@@ -1,0 +1,24 @@
+{
+  "schema": "monosashi-eval/eval-queries/v1",
+  "skill": "monosashi-eval",
+  "purpose": "Activation eval — verify the SKILL.md `description` triggers monosashi-eval on artifact-evaluation requests and stays dormant on unrelated ones. This is an eval DEFINITION (the trigger criteria), not a result; it is reproducible-but-LLM-dependent, so it is supporting evidence (framework §1), with the description text itself the primary evidence.",
+  "descriptionUnderTest": "Statically evaluate an AI agent / skill / harness / knowledge-doc artifact bundle against the Monosashi rubric, using LLM-as-judge.",
+  "should_trigger": [
+    "この .claude/skills フォルダを Monosashi ルーブリックで評価して",
+    "score these agents against the Monosashi rubric and give me a radar",
+    "assess the design quality of my skill bundle at ./my-skill",
+    "宣言と実体の乖離 (M2) を含めて、この成果物束を静的に採点して",
+    "run a static evaluation of ./artifacts (agents / skills / harness / docs) and flag anything needing human review",
+    "is this harness well-designed? evaluate the committed artifacts",
+    "この知識ドキュメントのエージェント追従性とサーフェス網羅を評価したい"
+  ],
+  "should_not_trigger": [
+    "write a new deployment agent for me",
+    "fix the failing test in aggregate.test.ts",
+    "summarize this PDF",
+    "what's the best way to deploy to production?",
+    "refactor select-tracks.ts for readability",
+    "review my pull request for correctness bugs"
+  ],
+  "notes": "should_not_trigger draws the boundary: monosashi-eval scores the *design/quality of AI-artifact bundles*, so authoring (write an agent), code-fixing, code review, and general Q&A must NOT route here. A query that fires the wrong side is a description-quality defect (relates to K1 consumability + S1 interface clarity)."
+}

@@ -1,0 +1,6 @@
+{
+  "type": "invoice_validation_result",
+  "invoiceId": "INV-H-A",
+  "valid": false,
+  "errors": ["TAX_MISMATCH"]
+}

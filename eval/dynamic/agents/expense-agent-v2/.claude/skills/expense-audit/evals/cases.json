@@ -1,0 +1,297 @@
+{
+  "version": "2.0.0",
+  "cases": [
+    {
+      "id": "sample-expenses",
+      "description": "サンプル経費明細: R1/R3/R4/R5/R6 の混在",
+      "input": {
+        "employee": { "id": "E001", "name": "山田太郎", "department": "営業部" },
+        "period": "2026-05",
+        "items": [
+          { "id": "EXP-001", "date": "2026-05-12", "category": "交通費", "description": "客先訪問 電車代", "amount": 1200, "receipt": true },
+          { "id": "EXP-002", "date": "2026-05-15", "category": "会議費", "description": "打ち合わせ会場費", "amount": 8000, "receipt": false },
+          { "id": "EXP-003", "date": "2026-05-20", "category": "交際費", "description": "取引先会食", "amount": 15000, "receipt": true },
+          { "id": "EXP-004", "date": "2026-04-30", "category": "雑費", "description": "文房具", "amount": 980, "receipt": true },
+          { "id": "EXP-005", "date": "2026-05-12", "category": "交通費", "description": "客先訪問 電車代(復路)", "amount": 1200, "receipt": true },
+          { "id": "EXP-006", "date": "2026-05-25", "category": "通信費", "description": "モバイルルーター利用料", "amount": 4980, "receipt": true }
+        ]
+      },
+      "expected": {
+        "type": "expense_report_result",
+        "employeeId": "E001",
+        "period": "2026-05",
+        "summary": { "total": 6, "approved": 2, "rejected": 2, "needsReview": 2, "approvedAmount": 6180 },
+        "results": [
+          { "id": "EXP-001", "status": "approved", "reasons": [] },
+          { "id": "EXP-002", "status": "rejected", "reasons": ["RECEIPT_REQUIRED"] },
+          { "id": "EXP-003", "status": "needs_review", "reasons": ["ENTERTAINMENT_LIMIT"] },
+          { "id": "EXP-004", "status": "rejected", "reasons": ["OUT_OF_PERIOD", "UNKNOWN_CATEGORY"] },
+          { "id": "EXP-005", "status": "needs_review", "reasons": ["POSSIBLE_DUPLICATE"] },
+          { "id": "EXP-006", "status": "approved", "reasons": [] }
+        ]
+      }
+    },
+    {
+      "id": "boundary-thresholds",
+      "description": "R3 (5000) / R5 (10000) の境界値",
+      "input": {
+        "employee": { "id": "E900" },
+        "period": "2026-05",
+        "items": [
+          { "id": "B-001", "date": "2026-05-01", "category": "交際費", "amount": 10000, "receipt": true },
+          { "id": "B-002", "date": "2026-05-02", "category": "交際費", "amount": 10001, "receipt": true },
+          { "id": "B-003", "date": "2026-05-03", "category": "会議費", "amount": 5000, "receipt": false },
+          { "id": "B-004", "date": "2026-05-04", "category": "会議費", "amount": 4999, "receipt": false }
+        ]
+      },
+      "expected": {
+        "type": "expense_report_result",
+        "employeeId": "E900",
+        "period": "2026-05",
+        "summary": { "total": 4, "approved": 2, "rejected": 1, "needsReview": 1, "approvedAmount": 14999 },
+        "results": [
+          { "id": "B-001", "status": "approved", "reasons": [] },
+          { "id": "B-002", "status": "needs_review", "reasons": ["ENTERTAINMENT_LIMIT"] },
+          { "id": "B-003", "status": "rejected", "reasons": ["RECEIPT_REQUIRED"] },
+          { "id": "B-004", "status": "approved", "reasons": [] }
+        ]
+      }
+    },
+    {
+      "id": "invalid-amounts",
+      "description": "R2: 0・負数・小数・文字列",
+      "input": {
+        "employee": { "id": "E901" },
+        "period": "2026-05",
+        "items": [
+          { "id": "A-001", "date": "2026-05-01", "category": "交通費", "amount": 0, "receipt": true },
+          { "id": "A-002", "date": "2026-05-02", "category": "交通費", "amount": -500, "receipt": true },
+          { "id": "A-003", "date": "2026-05-03", "category": "交通費", "amount": 1.5, "receipt": true },
+          { "id": "A-004", "date": "2026-05-04", "category": "交通費", "amount": "1200", "receipt": true }
+        ]
+      },
+      "expected": {
+        "type": "expense_report_result",
+        "employeeId": "E901",
+        "period": "2026-05",
+        "summary": { "total": 4, "approved": 0, "rejected": 4, "needsReview": 0, "approvedAmount": 0 },
+        "results": [
+          { "id": "A-001", "status": "rejected", "reasons": ["INVALID_AMOUNT"] },
+          { "id": "A-002", "status": "rejected", "reasons": ["INVALID_AMOUNT"] },
+          { "id": "A-003", "status": "rejected", "reasons": ["INVALID_AMOUNT"] },
+          { "id": "A-004", "status": "rejected", "reasons": ["INVALID_AMOUNT"] }
+        ]
+      }
+    },
+    {
+      "id": "duplicates",
+      "description": "R6: 1件目非該当・2件目以降該当・rejected の先行も既出扱い",
+      "input": {
+        "employee": { "id": "E902" },
+        "period": "2026-05",
+        "items": [
+          { "id": "D-001", "date": "2026-05-10", "category": "交通費", "amount": 800, "receipt": true },
+          { "id": "D-002", "date": "2026-05-10", "category": "交通費", "amount": 800, "receipt": true },
+          { "id": "D-003", "date": "2026-05-10", "category": "交通費", "amount": 800, "receipt": true },
+          { "id": "D-004", "date": "2026-05-10", "category": "交通費", "amount": 900, "receipt": true },
+          { "id": "D-005", "date": "2026-05-11", "category": "会議費", "amount": 6000, "receipt": false },
+          { "id": "D-006", "date": "2026-05-11", "category": "会議費", "amount": 6000, "receipt": true }
+        ]
+      },
+      "expected": {
+        "type": "expense_report_result",
+        "employeeId": "E902",
+        "period": "2026-05",
+        "summary": { "total": 6, "approved": 2, "rejected": 1, "needsReview": 3, "approvedAmount": 1700 },
+        "results": [
+          { "id": "D-001", "status": "approved", "reasons": [] },
+          { "id": "D-002", "status": "needs_review", "reasons": ["POSSIBLE_DUPLICATE"] },
+          { "id": "D-003", "status": "needs_review", "reasons": ["POSSIBLE_DUPLICATE"] },
+          { "id": "D-004", "status": "approved", "reasons": [] },
+          { "id": "D-005", "status": "rejected", "reasons": ["RECEIPT_REQUIRED"] },
+          { "id": "D-006", "status": "needs_review", "reasons": ["POSSIBLE_DUPLICATE"] }
+        ]
+      }
+    },
+    {
+      "id": "multi-reason",
+      "description": "複数ルール該当時の reasons の順序 (R1→R6)",
+      "input": {
+        "employee": { "id": "E903" },
+        "period": "2026-05",
+        "items": [
+          { "id": "M-001", "date": "2026-04-01", "category": "雑費", "amount": 0, "receipt": false }
+        ]
+      },
+      "expected": {
+        "type": "expense_report_result",
+        "employeeId": "E903",
+        "period": "2026-05",
+        "summary": { "total": 1, "approved": 0, "rejected": 1, "needsReview": 0, "approvedAmount": 0 },
+        "results": [
+          { "id": "M-001", "status": "rejected", "reasons": ["OUT_OF_PERIOD", "INVALID_AMOUNT", "UNKNOWN_CATEGORY"] }
+        ]
+      }
+    },
+    {
+      "id": "input-error-missing-date",
+      "description": "入力エラー契約: 必須フィールド欠落",
+      "input": {
+        "employee": { "id": "E904" },
+        "period": "2026-05",
+        "items": [
+          { "id": "X-001", "category": "交通費", "amount": 100, "receipt": true }
+        ]
+      },
+      "expected": {
+        "type": "input_error",
+        "errors": [
+          { "path": "items[0].date", "code": "MISSING_FIELD", "message": "必須フィールドが欠落しています" }
+        ]
+      }
+    },
+    {
+      "id": "sample-invoice-tax-mismatch",
+      "description": "サンプル請求書: 税率ごと切り捨てで算出した税額と不一致",
+      "input": {
+        "invoiceId": "INV-2026-001",
+        "issuer": { "name": "株式会社サンプル", "registrationNumber": "T1234567890123" },
+        "issueDate": "2026-05-31",
+        "dueDate": "2026-06-30",
+        "lines": [
+          { "description": "コンサルティング費用", "quantity": 2, "unitPrice": 50000, "taxRate": 0.1 },
+          { "description": "会議用弁当", "quantity": 15, "unitPrice": 833, "taxRate": 0.08 }
+        ],
+        "totals": { "taxExcluded": 112495, "tax": 11500, "taxIncluded": 123995 }
+      },
+      "expected": {
+        "type": "invoice_validation_result",
+        "invoiceId": "INV-2026-001",
+        "valid": false,
+        "errors": ["TAX_MISMATCH"]
+      }
+    },
+    {
+      "id": "invoice-valid",
+      "description": "全ルール非該当の請求書 (税額 10000+999=10999)",
+      "input": {
+        "invoiceId": "INV-2026-002",
+        "issuer": { "name": "株式会社サンプル", "registrationNumber": "T1234567890123" },
+        "issueDate": "2026-05-31",
+        "dueDate": "2026-06-30",
+        "lines": [
+          { "description": "コンサルティング費用", "quantity": 2, "unitPrice": 50000, "taxRate": 0.1 },
+          { "description": "会議用弁当", "quantity": 15, "unitPrice": 833, "taxRate": 0.08 }
+        ],
+        "totals": { "taxExcluded": 112495, "tax": 10999, "taxIncluded": 123494 }
+      },
+      "expected": {
+        "type": "invoice_validation_result",
+        "invoiceId": "INV-2026-002",
+        "valid": true,
+        "errors": []
+      }
+    },
+    {
+      "id": "invoice-group-rounding",
+      "description": "V2: line ごと切り捨て (132) は誤り、税率ごと切り捨て (133) が正",
+      "input": {
+        "invoiceId": "INV-2026-003",
+        "issuer": { "name": "株式会社サンプル", "registrationNumber": "T1234567890123" },
+        "issueDate": "2026-05-31",
+        "dueDate": "2026-06-30",
+        "lines": [
+          { "description": "弁当A", "quantity": 1, "unitPrice": 833, "taxRate": 0.08 },
+          { "description": "弁当B", "quantity": 1, "unitPrice": 833, "taxRate": 0.08 }
+        ],
+        "totals": { "taxExcluded": 1666, "tax": 133, "taxIncluded": 1799 }
+      },
+      "expected": {
+        "type": "invoice_validation_result",
+        "invoiceId": "INV-2026-003",
+        "valid": true,
+        "errors": []
+      }
+    },
+    {
+      "id": "invoice-bad-reg-number",
+      "description": "V1: 数字12桁 (13桁未満)",
+      "input": {
+        "invoiceId": "INV-2026-004",
+        "issuer": { "name": "株式会社サンプル", "registrationNumber": "T123456789012" },
+        "issueDate": "2026-05-31",
+        "dueDate": "2026-06-30",
+        "lines": [
+          { "description": "作業費", "quantity": 1, "unitPrice": 1000, "taxRate": 0.1 }
+        ],
+        "totals": { "taxExcluded": 1000, "tax": 100, "taxIncluded": 1100 }
+      },
+      "expected": {
+        "type": "invoice_validation_result",
+        "invoiceId": "INV-2026-004",
+        "valid": false,
+        "errors": ["INVALID_REG_NUMBER"]
+      }
+    },
+    {
+      "id": "invoice-due-before-issue",
+      "description": "V3: 支払期日が発行日より前",
+      "input": {
+        "invoiceId": "INV-2026-005",
+        "issuer": { "name": "株式会社サンプル", "registrationNumber": "T1234567890123" },
+        "issueDate": "2026-05-31",
+        "dueDate": "2026-05-01",
+        "lines": [
+          { "description": "作業費", "quantity": 1, "unitPrice": 1000, "taxRate": 0.1 }
+        ],
+        "totals": { "taxExcluded": 1000, "tax": 100, "taxIncluded": 1100 }
+      },
+      "expected": {
+        "type": "invoice_validation_result",
+        "invoiceId": "INV-2026-005",
+        "valid": false,
+        "errors": ["INVALID_DUE_DATE"]
+      }
+    },
+    {
+      "id": "invoice-bad-tax-rate",
+      "description": "V4: 税率 0.05 (税額自体は整合)",
+      "input": {
+        "invoiceId": "INV-2026-006",
+        "issuer": { "name": "株式会社サンプル", "registrationNumber": "T1234567890123" },
+        "issueDate": "2026-05-31",
+        "dueDate": "2026-06-30",
+        "lines": [
+          { "description": "作業費", "quantity": 1, "unitPrice": 1000, "taxRate": 0.05 }
+        ],
+        "totals": { "taxExcluded": 1000, "tax": 50, "taxIncluded": 1050 }
+      },
+      "expected": {
+        "type": "invoice_validation_result",
+        "invoiceId": "INV-2026-006",
+        "valid": false,
+        "errors": ["INVALID_TAX_RATE"]
+      }
+    },
+    {
+      "id": "invoice-all-errors",
+      "description": "V1〜V4 全該当時の errors の順序",
+      "input": {
+        "invoiceId": "INV-2026-007",
+        "issuer": { "name": "株式会社サンプル", "registrationNumber": "X1234567890123" },
+        "issueDate": "2026-05-31",
+        "dueDate": "2026-05-01",
+        "lines": [
+          { "description": "作業費", "quantity": 1, "unitPrice": 1000, "taxRate": 0.05 }
+        ],
+        "totals": { "taxExcluded": 1000, "tax": 999, "taxIncluded": 2000 }
+      },
+      "expected": {
+        "type": "invoice_validation_result",
+        "invoiceId": "INV-2026-007",
+        "valid": false,
+        "errors": ["INVALID_REG_NUMBER", "TAX_MISMATCH", "INVALID_DUE_DATE", "INVALID_TAX_RATE"]
+      }
+    }
+  ]
+}

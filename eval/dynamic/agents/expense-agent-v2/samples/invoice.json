@@ -1,0 +1,11 @@
+{
+  "invoiceId": "INV-2026-001",
+  "issuer": { "name": "株式会社サンプル", "registrationNumber": "T1234567890123" },
+  "issueDate": "2026-05-31",
+  "dueDate": "2026-06-30",
+  "lines": [
+    { "description": "コンサルティング費用", "quantity": 2, "unitPrice": 50000, "taxRate": 0.10 },
+    { "description": "会議用弁当", "quantity": 15, "unitPrice": 833, "taxRate": 0.08 }
+  ],
+  "totals": { "taxExcluded": 112495, "tax": 11500, "taxIncluded": 123995 }
+}

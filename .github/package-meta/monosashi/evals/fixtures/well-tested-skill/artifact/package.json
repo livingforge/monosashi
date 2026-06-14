@@ -1,0 +1,11 @@
+{
+  "name": "slugify",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Turn a title into a URL-safe slug.",
+  "main": "scripts/slugify.mjs",
+  "scripts": {
+    "test": "node --test",
+    "eval": "node evals/run.mjs"
+  }
+}
